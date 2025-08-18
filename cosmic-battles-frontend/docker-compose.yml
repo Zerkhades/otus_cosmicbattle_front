@@ -1,0 +1,18 @@
+services:
+  web:
+    build:
+      context: .
+      target: dev
+    image: cosmic-battles-frontend:dev
+    container_name: cosmic-battles-frontend-dev
+    environment:
+      # Vite will read PORT and host=true is set in vite.config.ts
+      - PORT=5173
+      - PREVIEW_PORT=4174
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev -- --host --port 5173
